@@ -6,7 +6,20 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+myStatus:string = "";
 
-  constructor() {}
+  constructor(private storage:Storage) {}
 
-}
+    ionviewDidEnter(){
+      this.storage.create()
+      .then(()=>{
+        this.storage.get('status')
+        .then((status)=>{
+          this.myStatus = status;
+        })
+        .catch();
+      })
+      .catch();
+    }
+  } 
+  
